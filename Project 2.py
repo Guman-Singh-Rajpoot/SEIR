@@ -25,7 +25,7 @@ def simhash(freq):
             final_hash |= (1 << i)
 
     return final_hash
-def get_words(url):
+def find_words(url):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, "html.parser")
 
@@ -42,8 +42,8 @@ url2 = sys.argv[2]
 
 print("Fetching pages...")
 
-freq1 = get_words(url1)
-freq2 = get_words(url2)
+freq1 = find_words(url1)
+freq2 = find_words(url2)
 
 hash1 = simhash(freq1)
 hash2 = simhash(freq2)
@@ -52,4 +52,5 @@ common_bits = 64 - diff_bits
 
 print("\nSimHash URL1 =", hash1)
 print("SimHash URL2 =", hash2)
+
 print("Common bits =", common_bits, "/ 64")
